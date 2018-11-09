@@ -28,9 +28,11 @@ const ControlButton = styled.button`
         background-color: #000;
       `};
 `;
+
 function toUpperCase(lower) {
   return lower.charAt(0).toUpperCase() + lower.substr(1);
 }
+
 function ControlBtn({ name }) {
   return (
     <AppContext.Consumer>
@@ -46,9 +48,8 @@ function ControlBtn({ name }) {
 export default function AppBar() {
   return (
     <Bar>
-      <Logo>Crypto</Logo>
-      <div />
-      <ControlBtn name="dashboard" />
+      <Logo> Crypto </Logo> <div />
+      <ControlBtn active name="dashboard" />
       <ControlBtn name="settings" />
     </Bar>
   );
