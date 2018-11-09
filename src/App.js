@@ -4,14 +4,17 @@ import AppLayout from "./layout/AppLayout";
 import AppBar from "./layout/AppBar";
 import { AppProvider } from "./AppProvider";
 import Settings from "./Settings";
+import Content from "./layout/Content";
 class App extends Component {
   render() {
     return (
       <AppLayout>
         <AppProvider>
           <AppBar />
-          <Settings />
-        </AppProvider>{" "}
+          <Content>
+            <Settings />
+          </Content>
+        </AppProvider>
       </AppLayout>
     );
   }

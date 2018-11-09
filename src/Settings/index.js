@@ -1,11 +1,12 @@
 import React from "react";
 import Welcome from "./Welcome";
 import ConfirmButton from "./ConfirmButton";
+import Page from "../layout/Page";
 export default function() {
   return (
-    <div>
-      <ConfirmButton />
+    <Page name="settings">
       <Welcome />;
-    </div>
+      <ConfirmButton />
+    </Page>
   );
 }
