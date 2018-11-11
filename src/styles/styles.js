@@ -1,8 +1,8 @@
-export const color = '#f8f8f8';
+export const color = '#fff';
 export const color2 = '#f8f8f8';
 export const color3 = '#42ff3a';
 
-export const lightBlueBackground = `background-color: ${color}`;
+export const lightBackground = `background-color: ${color}`;
 export const backgroundColor2 = `background-color: ${color2};`;
 export const greenBackgroundColor = `background-color: ${color3};`;
 
