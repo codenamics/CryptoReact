@@ -8,16 +8,16 @@ export const CoinGrid = styled.div`
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 15px;
 `;
-function getCoinsToDispaly(coinList) {
-  return Object.keys(coinList).slice(0, 100);
+function getCoinsToDispaly(coinList, topSection, favorites) {
+  return topSection ? favorites : Object.keys(coinList).slice(0, 100);
 }
-export default function() {
+export default function({ topSection }) {
   return (
     <AppContext.Consumer>
-      {({ coinList }) => (
+      {({ coinList, favorites }) => (
         <CoinGrid>
-          {getCoinsToDispaly(coinList).map(coinKey => (
-            <CoinTile coinKey={coinKey} />
+          {getCoinsToDispaly(coinList, topSection, favorites).map(coinKey => (
+            <CoinTile topSection={topSection} coinKey={coinKey} />
           ))}
         </CoinGrid>
       )}
