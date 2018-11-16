@@ -38,6 +38,7 @@ export class AppProvider extends Component {
   };
   componentDidMount = () => {
     this.fetchCoins();
+    this.fetchPrices();
   };
   fetchCoins = async () => {
     let coinList = (await cc.coinList()).Data;
@@ -46,10 +47,15 @@ export class AppProvider extends Component {
     });
   };
   confirmFavorites = () => {
-    this.setPage({
-      firstTime: false,
-      page: "dashboard"
-    });
+    this.setPage(
+      {
+        firstTime: false,
+        page: "dashboard"
+      },
+      () => {
+        this.fetchPrices();
+      }
+    );
     localStorage.setItem(
       "cryptoData",
       JSON.stringify({
@@ -58,6 +64,7 @@ export class AppProvider extends Component {
     );
     console.log(this.state.favorites);
   };
+
   savedSettings() {
     let cryptoData = JSON.parse(localStorage.getItem("cryptoData"));
     if (!cryptoData) {
@@ -80,6 +87,26 @@ export class AppProvider extends Component {
     this.setState({
       filteredCoins
     });
+  };
+  fetchPrices = async () => {
+    if (this.state.firstTime) return;
+    let prices = await this.prices();
+
+    this.setState({ prices });
+    console.log(this.state.prices);
+  };
+  prices = async () => {
+    let returnData = [];
+    for (let i = 0; i < this.state.favorites.length; i++) {
+      try {
+        let priceData = await cc.priceFull(this.state.favorites[i], "USD");
+
+        returnData.push(priceData);
+      } catch (e) {
+        console.warn("Fetch price error ", e);
+      }
+    }
+    return returnData;
   };
   render() {
     return (
