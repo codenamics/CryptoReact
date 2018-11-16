@@ -5,18 +5,31 @@ import { AppContext } from "../AppProvider";
 import CoinTile from "./CoinTile";
 export const CoinGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   grid-gap: 15px;
 `;
-function getCoinsToDispaly(coinList, topSection, favorites) {
-  return topSection ? favorites : Object.keys(coinList).slice(0, 100);
+
+function getLowerSectionCoins(coinList, filteredCoins) {
+  return (
+    (filteredCoins && Object.keys(filteredCoins)) ||
+    Object.keys(coinList).slice(0, 100)
+  );
+}
+
+function getCoinsToDispaly(coinList, topSection, favorites, filteredCoins) {
+  return topSection ? favorites : getLowerSectionCoins(coinList, filteredCoins);
 }
 export default function({ topSection }) {
   return (
     <AppContext.Consumer>
-      {({ coinList, favorites }) => (
+      {({ coinList, favorites, filteredCoins }) => (
         <CoinGrid>
-          {getCoinsToDispaly(coinList, topSection, favorites).map(coinKey => (
+          {getCoinsToDispaly(
+            coinList,
+            topSection,
+            favorites,
+            filteredCoins
+          ).map(coinKey => (
             <CoinTile topSection={topSection} coinKey={coinKey} />
           ))}
         </CoinGrid>

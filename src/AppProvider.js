@@ -15,7 +15,8 @@ export class AppProvider extends Component {
       confirmFavorites: this.confirmFavorites,
       addCoin: this.addCoin,
       removeCoin: this.removeCoin,
-      isInFavorites: this.isInFavorites
+      isInFavorites: this.isInFavorites,
+      setFilteredCoins: this.setFilteredCoins
     };
   }
 
@@ -31,7 +32,9 @@ export class AppProvider extends Component {
   };
   removeCoin = key => {
     let favorites = [...this.state.favorites];
-    this.setState({ favorites: _.pull(favorites, key) });
+    this.setState({
+      favorites: _.pull(favorites, key)
+    });
   };
   componentDidMount = () => {
     this.fetchCoins();
@@ -64,16 +67,25 @@ export class AppProvider extends Component {
       };
     }
     const { favorites } = cryptoData;
-    return { favorites };
+    return {
+      favorites
+    };
   }
   setPage = page =>
     this.setState({
       page
     });
+
+  setFilteredCoins = filteredCoins => {
+    this.setState({
+      filteredCoins
+    });
+  };
   render() {
     return (
       <AppContext.Provider value={this.state}>
-        {this.props.children}
+        {" "}
+        {this.props.children}{" "}
       </AppContext.Provider>
     );
   }
