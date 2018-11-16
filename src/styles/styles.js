@@ -9,7 +9,7 @@ export const greenBackgroundColor = `background-color: ${color3};`;
 export const fontColorGreen = `color: #9A96A7`;
 export const fontColorWhite = `color: white`;
 export const subtleBoxShadow = `box-shadow: 0px 0px 5px 1px`;
-export const greenBoxShadow = `box-shadow: 0px 0px 4px 2px #5fff17`;
+export const greenBoxShadow = `box-shadow: 0px 0px 4px 2px #000`;
 export const redBoxShadow = `box-shadow: 0px 0px 2px 2px #e41111`;
 
 export const fontSizeBig = 'font-size: 2em';

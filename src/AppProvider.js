@@ -12,10 +12,12 @@ export class AppProvider extends Component {
       favorites: [],
       ...this.savedSettings(),
       setPage: this.setPage,
-      confirmFavorites: this.confirmFavorites,
+
       addCoin: this.addCoin,
       removeCoin: this.removeCoin,
       isInFavorites: this.isInFavorites,
+      confirmFavorites: this.confirmFavorites,
+      setCurrentFavorite: this.setCurrentFavorite,
       setFilteredCoins: this.setFilteredCoins
     };
   }
@@ -47,10 +49,12 @@ export class AppProvider extends Component {
     });
   };
   confirmFavorites = () => {
-    this.setPage(
+    let currentFavorite = this.state.favorites[0];
+    this.setState(
       {
         firstTime: false,
-        page: "dashboard"
+        page: "dashboard",
+        currentFavorite
       },
       () => {
         this.fetchPrices();
@@ -59,10 +63,23 @@ export class AppProvider extends Component {
     localStorage.setItem(
       "cryptoData",
       JSON.stringify({
-        favorites: this.state.favorites
+        favorites: this.state.favorites,
+        currentFavorite
       })
     );
     console.log(this.state.favorites);
+  };
+  setCurrentFavorite = sym => {
+    this.setState({
+      currentFavorite: sym
+    });
+    localStorage.setItem(
+      "cryptoData",
+      JSON.stringify({
+        ...JSON.parse(localStorage.getItem("cryptoData")),
+        currentFavorite: sym
+      })
+    );
   };
 
   savedSettings() {
@@ -73,9 +90,10 @@ export class AppProvider extends Component {
         firstTime: true
       };
     }
-    const { favorites } = cryptoData;
+    const { favorites, currentFavorite } = cryptoData;
     return {
-      favorites
+      favorites,
+      currentFavorite
     };
   }
   setPage = page =>
@@ -92,7 +110,9 @@ export class AppProvider extends Component {
     if (this.state.firstTime) return;
     let prices = await this.prices();
 
-    this.setState({ prices });
+    this.setState({
+      prices
+    });
     console.log(this.state.prices);
   };
   prices = async () => {
@@ -111,8 +131,7 @@ export class AppProvider extends Component {
   render() {
     return (
       <AppContext.Provider value={this.state}>
-        {" "}
-        {this.props.children}{" "}
+        {this.props.children}
       </AppContext.Provider>
     );
   }
