@@ -5,7 +5,7 @@ const Bar = styled.div`
   display: grid;
   grid-template-columns: 180px auto 150px 150px;
   margin-bottom: 40px;
-  background-color: #fff;
+
   min-height: 80px;
   align-items: center;
 `;
@@ -15,17 +15,18 @@ const Logo = styled.h1`
 `;
 
 const ControlButton = styled.button`
-  border-radius: 22px;
-  background-color: #fff;
+  padding: 10px 0;
+background:none;
   color: #9A96A7;
   border: none;
   font-size: 17px
   outline:none;
   cursor: pointer;
+  min-width:0px;
     ${props =>
       props.active &&
       css`
-        background-color: #000;
+        border-bottom: 3px solid #51ce65;
       `};
 `;
 

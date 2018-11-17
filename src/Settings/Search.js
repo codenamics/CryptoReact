@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { backgroundColor2, fontSize2 } from "../styles/styles";
+import { fontSize2 } from "../styles/styles";
 import { AppContext } from "../AppProvider";
 import _ from "lodash";
 import fuzzy from "fuzzy";

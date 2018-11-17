@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { Tile } from "../layout/Tile";
-import { fontSize3, fontSizeBig, greenBoxShadow } from "../styles/styles";
+import { fontSize3, fontSizeBig, BoxShadow } from "../styles/styles";
 import { CoinHeaderGridStyled } from "../Settings/CoinHeaderGrid";
 import { AppContext } from "../AppProvider";
 
@@ -41,7 +41,7 @@ const PriceTileStyled = styled(Tile)`
   ${props =>
     props.currentFavorite &&
     css`
-      ${greenBoxShadow}
+      ${BoxShadow}
       pointer-events:none;
     `}
 `;

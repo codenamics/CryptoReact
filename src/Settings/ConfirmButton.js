@@ -1,13 +1,13 @@
 import React from "react";
 import { AppContext } from "../AppProvider";
 import styled from "styled-components";
-import { fontSize1, greenBoxShadow, color3 } from "../styles/styles";
+import { BoxShadow } from "../styles/styles";
 const ConfirmButtonEl = styled.button`
   margin: 20px;
   color: green;
   cursor: pointer;
   &:hover {
-    ${greenBoxShadow}
+    ${BoxShadow}
   }
 `;
 export const CenterDiv = styled.div`

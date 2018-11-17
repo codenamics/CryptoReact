@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { DeletableTile } from "../layout/Tile";
 
 export const CoinHeaderGridStyled = styled.div`
