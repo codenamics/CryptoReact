@@ -1,9 +1,9 @@
-export default function(historical) {
+export default function (historical) {
   return {
     colors: ["#52ce65"],
 
     title: {
-      text: "CryptoCurrency Data"
+      text: "Historic Price from last 12 months"
     },
     chart: {
       backgroundColor: "none"
@@ -15,7 +15,11 @@ export default function(historical) {
     credits: {
       enabled: false
     },
-    xAxis: { type: "datetime", gridLineColor: "#000", lineColor: "#000" },
+    xAxis: {
+      type: "datetime",
+      gridLineColor: "#000",
+      lineColor: "#000"
+    },
     yAxis: {
       gridLineColor: "#000",
 
@@ -45,33 +49,31 @@ export default function(historical) {
     series: historical,
 
     responsive: {
-      rules: [
-        {
-          condition: {
-            maxWidth: 500
+      rules: [{
+        condition: {
+          maxWidth: 500
+        },
+        chartOptions: {
+          legend: {
+            align: "center",
+            verticalAlign: "bottom",
+            layout: "horizontal"
           },
-          chartOptions: {
-            legend: {
-              align: "center",
-              verticalAlign: "bottom",
-              layout: "horizontal"
+          yAxis: {
+            labels: {
+              align: "left",
+              x: 0,
+              y: -5
             },
-            yAxis: {
-              labels: {
-                align: "left",
-                x: 0,
-                y: -5
-              },
-              title: {
-                text: null
-              }
-            },
-            subtitle: {
+            title: {
               text: null
             }
+          },
+          subtitle: {
+            text: null
           }
         }
-      ]
+      }]
     }
   };
 }

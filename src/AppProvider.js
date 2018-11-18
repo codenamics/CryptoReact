@@ -59,11 +59,16 @@ export class AppProvider extends Component {
       {
         type: "areaspline",
         color: {
-          linearGradient: { x1: 0, x2: 2, y1: 1, y2: 1 },
+          linearGradient: {
+            x1: 0,
+            x2: 2,
+            y1: 1,
+            y2: 1
+          },
           stops: [[0, "green"], [1, "blue"]]
         },
         fillColor: " none",
-        name: this.state.currentFavorite,
+        name: "USD",
         data: results.map((ticker, index) => [
           moment()
             .subtract({
@@ -71,6 +76,28 @@ export class AppProvider extends Component {
             })
             .valueOf(),
           ticker.USD
+        ])
+      },
+      {
+        type: "areaspline",
+        color: {
+          linearGradient: {
+            x1: 0,
+            x2: 2,
+            y1: 1,
+            y2: 1
+          },
+          stops: [[0, "red"], [1, "blue"]]
+        },
+        fillColor: " none",
+        name: "EUR",
+        data: results.map((ticker, index) => [
+          moment()
+            .subtract({
+              months: TIME_UNITS - index
+            })
+            .valueOf(),
+          ticker.EUR
         ])
       }
     ];
@@ -84,7 +111,7 @@ export class AppProvider extends Component {
       promises.push(
         cc.priceHistorical(
           this.state.currentFavorite,
-          ["USD"],
+          ["USD", "EUR"],
           moment()
             .subtract({
               months: units
@@ -172,7 +199,10 @@ export class AppProvider extends Component {
     let returnData = [];
     for (let i = 0; i < this.state.favorites.length; i++) {
       try {
-        let priceData = await cc.priceFull(this.state.favorites[i], "USD");
+        let priceData = await cc.priceFull(this.state.favorites[i], [
+          "USD",
+          "EUR"
+        ]);
 
         returnData.push(priceData);
       } catch (e) {
